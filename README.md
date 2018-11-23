@@ -2,7 +2,7 @@ Hanoi Game
 -----
 Simple version of Hanoi game, build with react.
 
-![Screenshot](/public/screenshot.png | width=200)
+<img src="/public/screenshot.png" width="200px">
 
 # Demo
 http://hanoi-game-react.herokuapp.com/
