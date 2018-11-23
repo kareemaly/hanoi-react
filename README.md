@@ -15,5 +15,8 @@ npm install
 npm start
 ```
 
+# Hanoi Game Component
+[src/components/HanoiGame.js](/src/components/HanoiGame.js)
+
 # License
 This project is licensed under the MIT license.
