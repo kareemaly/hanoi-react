@@ -14,7 +14,8 @@ const Wrapper = styled.div`
 `;
 
 const GameWrapper = styled.div`
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
 `;
 
 const Towers = styled.div`
