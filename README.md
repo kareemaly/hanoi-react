@@ -1,6 +1,6 @@
 Hanoi Game
 -----
-Simple version of Hanoi game, build with react.
+Hanoi game built with React, just for fun.
 
 <img src="/public/screenshot.png" width="600px">
 
