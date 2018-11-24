@@ -3,85 +3,6 @@ import styled from 'styled-components';
 import update from 'immutability-helper';
 import GameDescription from './GameDescription';
 
-const Wrapper = styled.div` 
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 16px;
-  font-family: Droid Sans;
-`;
-
-const GameWrapper = styled.div`
-  width: 100%;
-  max-width: 500px;
-  margin-top: 50px;
-`;
-
-const Towers = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Tower = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  background: ${props => props.isSelected ? '#BBB' : '#EEE'};
-  padding: 20px 10px;
-  flex-basis: calc(33.33% - 30px);
-  cursor: pointer;
-  &:hover {
-    background: #BBB;
-  }
-`;
-
-const Disk = styled.div`
-  height: 10px;
-  width: ${props => (props.value/props.length) * 100}%;
-  background: #333;
-  margin-top: 3px;
-`;
-
-const ErrorMessage = styled.div`
-  color: #b71c1c;
-  margin-top: 10px;
-`;
-
-const ScoreBoard = styled.div`
-  padding: 10px;
-  margin-bottom: 10px;
-  background: #EEE;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Score = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 10px;
-`;
-
-const ScoreKey = styled.div`
-  font-weight: bold;
-  margin-right: 5px;
-  text-align: center;
-`;
-
-const ScoreValue = styled.div``;
-
-const ScoreButton = styled.button`
-  border: 0;
-  background: #FFF;
-  padding: 3px 10px;
-  cursor: pointer;
-  margin: 0 10px;
-`;
-
 class HanoiGame extends React.Component {
   constructor(props) {
     super(props);
@@ -228,5 +149,85 @@ class HanoiGame extends React.Component {
     )
   }
 }
+
+
+const Wrapper = styled.div` 
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 16px;
+  font-family: Droid Sans;
+`;
+
+const GameWrapper = styled.div`
+  width: 100%;
+  max-width: 500px;
+  margin-top: 50px;
+`;
+
+const Towers = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Tower = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background: ${props => props.isSelected ? '#BBB' : '#EEE'};
+  padding: 20px 10px;
+  flex-basis: calc(33.33% - 30px);
+  cursor: pointer;
+  &:hover {
+    background: #BBB;
+  }
+`;
+
+const Disk = styled.div`
+  height: 10px;
+  width: ${props => (props.value/props.length) * 100}%;
+  background: #333;
+  margin-top: 3px;
+`;
+
+const ErrorMessage = styled.div`
+  color: #b71c1c;
+  margin-top: 10px;
+`;
+
+const ScoreBoard = styled.div`
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #EEE;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Score = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+`;
+
+const ScoreKey = styled.div`
+  font-weight: bold;
+  margin-right: 5px;
+  text-align: center;
+`;
+
+const ScoreValue = styled.div``;
+
+const ScoreButton = styled.button`
+  border: 0;
+  background: #FFF;
+  padding: 3px 10px;
+  cursor: pointer;
+  margin: 0 10px;
+`;
 
 export default HanoiGame;
