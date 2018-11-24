@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import update from 'immutability-helper';
+import GameDescription from './GameDescription';
 
 const Wrapper = styled.div` 
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   font-size: 16px;
   font-family: Droid Sans;
@@ -16,6 +16,7 @@ const Wrapper = styled.div`
 const GameWrapper = styled.div`
   width: 100%;
   max-width: 500px;
+  margin-top: 50px;
 `;
 
 const Towers = styled.div`
@@ -46,9 +47,7 @@ const Disk = styled.div`
 `;
 
 const ErrorMessage = styled.div`
-  background: #b71c1c;
-  color: #FFF;
-  padding: 10px;
+  color: #b71c1c;
   margin-top: 10px;
 `;
 
@@ -58,15 +57,19 @@ const ScoreBoard = styled.div`
   background: #EEE;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const Score = styled.div`
   display: flex;
+  align-items: center;
+  margin-right: 10px;
 `;
 
 const ScoreKey = styled.div`
   font-weight: bold;
   margin-right: 5px;
+  text-align: center;
 `;
 
 const ScoreValue = styled.div``;
@@ -76,31 +79,51 @@ const ScoreButton = styled.button`
   background: #FFF;
   padding: 3px 10px;
   cursor: pointer;
+  margin: 0 10px;
 `;
 
 class HanoiGame extends React.Component {
-  initialTowers = [
-    [ 1, 2, 3, 4 ],
-    [ 0, 0, 0, 0 ],
-    [ 0, 0, 0, 0 ],
-  ];
+  constructor(props) {
+    super(props);
+    this.state = this.getInitialState(4);
+  }
 
-  state = {
-    towerLength: 4,
-    towers: this.initialTowers,
-    clickedTowerIndex: -1,
-    error: null,
-    noOfMoves: 0,
+  incrementDisks = () => {
+    this.setState(
+      this.getInitialState(this.state.towerLength + 1)
+    )
+  };
+
+  decrementDisks = () => {
+    const disksNo = this.state.towerLength - 1;
+    if (disksNo <= 0) {
+      this.setState({
+        error: `Disks can't be less than 1`,
+      });
+    } else {
+      this.setState(this.getInitialState(disksNo));
+    }
   };
 
   reset = () => {
-    this.setState({
-      towers: this.initialTowers,
-      clickedTowerIndex: -1,
-      error: null,
-      noOfMoves: 0,
-    });
+    this.setState(
+      this.getInitialState(this.state.towerLength)
+    );
   };
+
+  getInitialState = (towerLength) => ({
+    towerLength,
+    towers: this.getInitialTowers(towerLength),
+    clickedTowerIndex: -1,
+    error: null,
+    noOfMoves: 0,
+  });
+
+  getInitialTowers = (towerLength) => ([
+    Array.from({ length: towerLength }, (_, i) => i + 1),
+    Array.from({ length: towerLength }, () => 0),
+    Array.from({ length: towerLength }, () => 0),
+  ]);
 
   moveDesk = (col1, col2) => {
     console.log('moving desk', col1, col2);
@@ -149,10 +172,8 @@ class HanoiGame extends React.Component {
 
   onTowerClick = (towerIndex) => {
     if (this.state.clickedTowerIndex === towerIndex) {
-      return;
-    }
-
-    if (this.state.clickedTowerIndex > -1) {
+      this.setState({ clickedTowerIndex: -1 });
+    } else if (this.state.clickedTowerIndex > -1) {
       this.moveDesk(this.state.clickedTowerIndex, towerIndex);
     } else {
       this.setState({ clickedTowerIndex: towerIndex });
@@ -169,11 +190,22 @@ class HanoiGame extends React.Component {
     } = this.state;
     return (
       <Wrapper>
+        <GameDescription />
         <GameWrapper>
           <ScoreBoard>
             <Score>
-              <ScoreKey>Number of moves: </ScoreKey>
+              <ScoreKey>No. of moves: </ScoreKey>
               <ScoreValue>{noOfMoves}</ScoreValue>
+            </Score>
+            <Score>
+              <ScoreKey>No. of disks: </ScoreKey>
+              <ScoreButton onClick={this.incrementDisks}>
+                +
+              </ScoreButton>
+              {towerLength}
+              <ScoreButton onClick={this.decrementDisks}>
+                -
+              </ScoreButton>
             </Score>
             <ScoreButton
               onClick={this.reset}
